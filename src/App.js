@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
+import Notification from './Notifications'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Home />
+                    <Notification />
                   </ProtectedRoute>
                 }
               />
