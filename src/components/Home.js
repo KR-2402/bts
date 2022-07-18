@@ -19,9 +19,8 @@ const Home = () => {
       <div className="p-4 box mt-3 text-center">
         Hello Welcome <br />
         {user && user.email}
-        
       </div>
-            <div className="d-grid gap-2">
+      <div className="d-grid gap-2">
         <Button variant="primary" onClick={handleLogout}>
           Log out
         </Button>
