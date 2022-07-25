@@ -10,9 +10,7 @@ import Notification from './Notifications'
 
 function App() {
   return (
-    <Container style={{ width: "400px" }}>
-      <Row>
-        <Col>
+    <div className="wel>">
           <UserAuthContextProvider>
             <Routes>
               <Route
@@ -21,6 +19,7 @@ function App() {
                   <ProtectedRoute>
                     <Home />
                     <Notification />
+                    
                   </ProtectedRoute>
                 }
               />
@@ -28,9 +27,7 @@ function App() {
               <Route path="/signup" element={<Signup />} />
             </Routes>
           </UserAuthContextProvider>
-        </Col>
-      </Row>
-    </Container>
+          </div>
   );
 }
 

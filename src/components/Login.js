@@ -4,6 +4,8 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
+import "../App.css";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -35,7 +37,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="p-4 box">
+      <div className="p-4 box"  style={{ width: "400px" }}>
         <h2 className="mb-3">BUS MANAGEMENT</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
@@ -70,7 +72,7 @@ const Login = () => {
           />
         </div>
       </div>
-      <div className="p-4 box mt-3 text-center">
+      <div className="p-4 box mt-3 text-center " style={{ width: "400px" }}>
         Don't have an account? <Link to="/signup">Sign up</Link>
       </div>
     </>

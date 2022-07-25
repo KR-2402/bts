@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
+import "../App.css";
+
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +26,7 @@ const Signup = () => {
 
   return (
     <>
-      <div className="p-4 box">
+      <div className="p-4 box"  style={{ width: "400px" }}>
         <h2 className="mb-3">BUS MANAGEMENT</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
@@ -44,14 +46,14 @@ const Signup = () => {
             />
           </Form.Group>
 
-          <div className="d-grid gap-2">
+          <div className="d-grid gap-2" >
             <Button variant="primary" type="Submit">
               Sign up
             </Button>
           </div>
         </Form>
       </div>
-      <div className="p-4 box mt-3 text-center">
+      <div className="p-4 box mt-3 text-center " style={{ width: "400px" }}>
         Already have an account? <Link to="/">Log In</Link>
       </div>
     </>
