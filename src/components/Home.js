@@ -49,13 +49,14 @@ const Home = () => {
             <Nav.Link onClick={handleShow}>
         Register
       </Nav.Link>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Register here</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeci4aPL40Yy1LuV9uyw77EFIUtXIbG1HS_ZgKhdcJdNR6NIg/viewform?embedded=true" width="100%" height="300px" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+          {/* <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -79,16 +80,16 @@ const Home = () => {
                     <option value="c">C</option>
                     <option value="d">D</option>
                   </select>        
-          </Form>
+          </Form> */}
         </Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>
             Save Changes and Proceed to Pay
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
             <Nav.Link onClick={Show}>Payment</Nav.Link>
             <Modal show={s} onHide={Close}>
