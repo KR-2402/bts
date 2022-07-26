@@ -1,4 +1,4 @@
-import React ,{useState}from "react";
+import React ,{useState,useEffect}from "react";
 import { Button, ModalBody, NavbarBrand } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../context/UserAuthContext";
@@ -8,8 +8,34 @@ import logo from "./logo.png";
 import pay from "./pay.jpeg";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { Link} from "react-router-dom";
+import { getDatabase,ref, onValue } from "firebase/database";
+import app from "../firebase";
+
+
 
 const Home = () => {
+  
+const db = getDatabase(app);
+const [loc,setloc] = useState()
+
+// onValue(starCountRef, (snapshot) => {
+//   const data = snapshot.val();
+//   console.log(data)
+//   setloc(data.place)
+//  //updateStarCount(postElement, data);
+// });
+
+useEffect(() => {
+  //const querySoil = ref(database,  props.device_id + "/" + props.sensor);
+  const starCountRef = ref(db, 'users/');
+  return onValue(starCountRef, (snapshot) => {
+      if (snapshot.exists()) {
+          setloc(snapshot.val().place);
+      }
+  });
+});
+  //const database = getDatabase(app);
   const [show, setShow] = useState(false);
   const [s, set]=useState(false);
   const Close = () => set(false);
@@ -91,7 +117,8 @@ const Home = () => {
           </Button>
         </Modal.Footer> */}
       </Modal>
-            <Nav.Link onClick={Show}>Payment</Nav.Link>
+
+            <Nav.Link><Link to="/pay">Payment</Link></Nav.Link>
             <Modal show={s} onHide={Close}>
             <Modal.Header closeButton>
             <Modal.Title>Scan code to pay</Modal.Title>
@@ -113,7 +140,7 @@ const Home = () => {
       
       <div className="p-4 box  text-center">
         Hello Welcome <br />
-        {user && user.email}
+        Bus at {loc}
       </div>
       <div className="notif">
         {/* Notifications appear here. */}

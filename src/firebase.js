@@ -13,7 +13,8 @@ const firebaseConfig = {
   projectId: "login-1b1c2",
   storageBucket: "login-1b1c2.appspot.com",
   messagingSenderId: "913260442067",
-  appId: "1:913260442067:web:e931fcc536a99f0273ff26"
+  appId: "1:913260442067:web:e931fcc536a99f0273ff26",
+  databaseURL:"https://login-1b1c2-default-rtdb.asia-southeast1.firebasedatabase.app/"
 };
 
 // Initialize Firebase

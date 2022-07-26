@@ -7,7 +7,7 @@ import Signup from "./components/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import Notification from './Notifications'
-
+import Pay from "./payment";
 function App() {
   return (
     <div className="wel>">
@@ -19,10 +19,10 @@ function App() {
                   <ProtectedRoute>
                     <Home />
                     <Notification />
-                    
                   </ProtectedRoute>
                 }
               />
+              <Route path="/pay" element={<Pay/>} />
               <Route path="/" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
             </Routes>

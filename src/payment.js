@@ -9,6 +9,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import pay from "./components/pay.jpeg";
+
 
 function Pay() {
 
@@ -59,6 +61,8 @@ function Pay() {
             billingAddress
             shippingAddress
           />
+          <img src ={pay} width="200px" height="200px"></img>
+          
         </div>
       </div>
     </div>
