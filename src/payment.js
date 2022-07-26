@@ -39,7 +39,7 @@ function Pay() {
 
   return (
     <div className="App">
-      <div className="container">
+      <div className="container   ">
         <br />
         <br />
         <h1 className="text-center">Stripe Checkout</h1>
@@ -51,7 +51,7 @@ function Pay() {
           Product Description: {product.description}
         </h3>
         <br />
-        <div className="form-group container">
+        <div className="form-group container align center ">
           <StripeCheckout
             className="center"
             stripeKey="pk_test_51LPWIJSJX6wjsVHYYEku5VbJCglG7I10jWyszbz1uZr1qu2wv0E1ffsmomdNgXY0wzjwYKdLcN1RoDeB7v7iUpcf00C36s6N07"
@@ -60,9 +60,12 @@ function Pay() {
             name="Sample Book"
             billingAddress
             shippingAddress
-          />
-          <img src ={pay} width="200px" height="200px"></img>
-          
+          />         
+        </div>
+        <br></br>
+        <h3  className="text-center">OR</h3>
+        <div className="form-group container align center">
+        <img src ={pay} width="200px" height="200px"></img>
         </div>
       </div>
     </div>

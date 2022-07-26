@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
 import firebase from "./firebase";
 import { getMessaging, getToken, onMessage} from "firebase/messaging";
+import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -49,3 +50,5 @@ export const onMessageListener = () =>
       resolve(payload);
     });
   });
+
+  export const db = getFirestore(app);

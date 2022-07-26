@@ -3,7 +3,7 @@ import { Button, ModalBody, NavbarBrand } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../context/UserAuthContext";
 import 'bootstrap/dist/css/bootstrap.css'
-import { Navbar,NavDropdown,Nav} from 'react-bootstrap';
+import { Navbar,NavDropdown,Nav,Container,Row,Col} from 'react-bootstrap';
 import logo from "./logo.png";
 import pay from "./pay.jpeg";
 import Form from 'react-bootstrap/Form';
@@ -11,14 +11,16 @@ import Modal from 'react-bootstrap/Modal';
 import { Link} from "react-router-dom";
 import { getDatabase,ref, onValue } from "firebase/database";
 import app from "../firebase";
-
-
-
+import List from "./List";
 const Home = () => {
-  
+  const [listId, setListId] = useState("");
+
+  const getListIdHandler = (id) => {
+    console.log("The ID of document to be edited: ", id);
+    setListId(id);
+  };
 const db = getDatabase(app);
 const [loc,setloc] = useState()
-
 // onValue(starCountRef, (snapshot) => {
 //   const data = snapshot.val();
 //   console.log(data)
@@ -145,6 +147,14 @@ useEffect(() => {
       <div className="notif">
         {/* Notifications appear here. */}
       </div>
+      <br></br>
+      <Container>
+        <Row>
+          <Col>
+            <List getListId={getListIdHandler} />
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };
