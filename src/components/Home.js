@@ -1,16 +1,19 @@
 import React ,{useState}from "react";
-import { Button, NavbarBrand } from "react-bootstrap";
+import { Button, ModalBody, NavbarBrand } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../context/UserAuthContext";
 import 'bootstrap/dist/css/bootstrap.css'
 import { Navbar,NavDropdown,Nav} from 'react-bootstrap';
 import logo from "./logo.png";
+import pay from "./pay.jpeg";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
 const Home = () => {
   const [show, setShow] = useState(false);
-
+  const [s, set]=useState(false);
+  const Close = () => set(false);
+  const Show = () => set(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { logOut, user } = useUserAuth();
@@ -34,7 +37,7 @@ const Home = () => {
         </Navbar.Brand>
 
         <Navbar.Toggle className="coloring" />
-        <Navbar.Collapse>
+        <Navbar.Collapse className="align">
           <Nav>
             {/* <NavDropdown title="Dropdown">
               <NavDropdown.Item href="#dpd/1">1</NavDropdown.Item>
@@ -87,7 +90,15 @@ const Home = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-            <Nav.Link href="#about-us">About Us</Nav.Link>
+            <Nav.Link onClick={Show}>Payment</Nav.Link>
+            <Modal show={s} onHide={Close}>
+            <Modal.Header closeButton>
+            <Modal.Title>Scan code to pay</Modal.Title>
+           </Modal.Header>
+        <Modal.Body>
+          <img src ={pay} width="200px" height="200px"></img>
+        </Modal.Body>
+        </Modal>
             <Nav.Link href="#contact-us">Contact Us</Nav.Link>
    `         <Nav.Link href="#">Welcome {user && user.email}</Nav.Link>
    <Button variant="primary" onClick={handleLogout}>
