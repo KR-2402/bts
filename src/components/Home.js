@@ -1,25 +1,47 @@
 import React ,{useState,useEffect}from "react";
-import { Button, NavbarBrand } from "react-bootstrap";
+import { Button, ModalBody, NavbarBrand } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../context/UserAuthContext";
 import 'bootstrap/dist/css/bootstrap.css'
-import { Navbar,NavDropdown,Nav} from 'react-bootstrap';
+import { Navbar,NavDropdown,Nav,Container,Row,Col} from 'react-bootstrap';
 import logo from "./logo.png";
+import pay from "./pay.jpeg";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
- import { getDatabase,ref,onValue } from "firebase/database";
-import db from "../firebase"
-
+import { Link} from "react-router-dom";
+import { getDatabase,ref, onValue } from "firebase/database";
+import app from "../firebase";
+import List from "./List";
 const Home = () => {
-//const db = getDatabase();
-  const starCountRef = ref(db, 'users/' );
-onValue(starCountRef, (snapshot) => {
-  const data = snapshot.val();
-  console.log(data)
-  //updateStarCount(postElement, data);
-});
-  const [show, setShow] = useState(false);
+  const [listId, setListId] = useState("");
 
+  const getListIdHandler = (id) => {
+    console.log("The ID of document to be edited: ", id);
+    setListId(id);
+  };
+const db = getDatabase(app);
+const [loc,setloc] = useState()
+// onValue(starCountRef, (snapshot) => {
+//   const data = snapshot.val();
+//   console.log(data)
+//   setloc(data.place)
+//  //updateStarCount(postElement, data);
+// });
+
+useEffect(() => {
+  //const querySoil = ref(database,  props.device_id + "/" + props.sensor);
+  const starCountRef = ref(db, 'users/');
+  return onValue(starCountRef, (snapshot) => {
+      if (snapshot.exists()) {
+          setloc(snapshot.val().place);
+      }
+  });
+});
+  //const database = getDatabase(app);
+  const [show, setShow] = useState(false);
+  const [s, set]=useState(false);
+  const Close = () => set(false);
+  const Show = () => set(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { logOut, user } = useUserAuth();
@@ -46,7 +68,7 @@ onValue(starCountRef, (snapshot) => {
         </Navbar.Brand>
 
         <Navbar.Toggle className="coloring" />
-        <Navbar.Collapse>
+        <Navbar.Collapse className="align">
           <Nav>
             {/* <NavDropdown title="Dropdown">
               <NavDropdown.Item href="#dpd/1">1</NavDropdown.Item>
@@ -58,13 +80,14 @@ onValue(starCountRef, (snapshot) => {
             <Nav.Link onClick={handleShow}>
         Register
       </Nav.Link>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Register here</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeci4aPL40Yy1LuV9uyw77EFIUtXIbG1HS_ZgKhdcJdNR6NIg/viewform?embedded=true" width="100%" height="300px" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+          {/* <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -88,18 +111,27 @@ onValue(starCountRef, (snapshot) => {
                     <option value="c">C</option>
                     <option value="d">D</option>
                   </select>        
-          </Form>
+          </Form> */}
         </Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>
             Save Changes and Proceed to Pay
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
-            <Nav.Link href="#about-us">About Us</Nav.Link>
+
+            <Nav.Link><Link to="/pay">Payment</Link></Nav.Link>
+            <Modal show={s} onHide={Close}>
+            <Modal.Header closeButton>
+            <Modal.Title>Scan code to pay</Modal.Title>
+           </Modal.Header>
+        <Modal.Body>
+          <img src ={pay} width="200px" height="200px"></img>
+        </Modal.Body>
+        </Modal>
             <Nav.Link href="#contact-us">Contact Us</Nav.Link>
    `         <Nav.Link href="#">Welcome {user && user.email}</Nav.Link>
    <Button variant="primary" onClick={handleLogout}>
@@ -113,11 +145,19 @@ onValue(starCountRef, (snapshot) => {
       
       <div className="p-4 box  text-center">
         Hello Welcome <br />
-        {user && user.email}
+        Bus at {loc}
       </div>
       <div className="notif">
         {/* Notifications appear here. */}
       </div>
+      <br></br>
+      <Container>
+        <Row>
+          <Col>
+            <List getListId={getListIdHandler} />
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };
