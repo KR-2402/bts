@@ -31,13 +31,15 @@ function App() {
                   <ProtectedRoute>
                     <Home />
                     <Notification />
+                    <Admin/>
                   </ProtectedRoute>
+                 
                 }
               />
               <Route path="/pay" element={<Pay/>} />
               <Route path="/" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/admin"  element={<Admin/>}/>
+              <Route path="/admin" element={<Admin/>}></Route>
            </Routes>
           </UserAuthContextProvider>
           </div>

@@ -3,10 +3,15 @@ import { Container, Navbar,Nav, Row, Col,Button } from "react-bootstrap";
 import Addlist from "./Addlist";
 import List from "./List";
 import "../App.css";
+import { useUserAuth } from "../context/UserAuthContext";
+import { Navigate } from "react-router-dom";
 
 function Admin() {
   const [listId, setListId] = useState("");
-
+  const { user } = useUserAuth();
+if(!user){
+  return <Navigate to="/"></Navigate>
+}
   const getListIdHandler = (id) => {
     console.log("The ID of document to be edited: ", id);
     setListId(id);
