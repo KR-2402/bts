@@ -1,4 +1,4 @@
-import React ,{useState}from "react";
+import React ,{useState,useEffect}from "react";
 import { Button, NavbarBrand } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../context/UserAuthContext";
@@ -7,8 +7,17 @@ import { Navbar,NavDropdown,Nav} from 'react-bootstrap';
 import logo from "./logo.png";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+ import { getDatabase,ref,onValue } from "firebase/database";
+import db from "../firebase"
 
 const Home = () => {
+//const db = getDatabase();
+  const starCountRef = ref(db, 'users/' );
+onValue(starCountRef, (snapshot) => {
+  const data = snapshot.val();
+  console.log(data)
+  //updateStarCount(postElement, data);
+});
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -23,6 +32,9 @@ const Home = () => {
       console.log(error.message);
     }
   };
+
+  // 
+  
   return (
     <>
 
