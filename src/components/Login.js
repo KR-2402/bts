@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
 import "../App.css";
-
+//import { useUserAuth } from "../context/UserAuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,13 +13,19 @@ const Login = () => {
   const [error, setError] = useState("");
   const { logIn, googleSignIn } = useUserAuth();
   const navigate = useNavigate();
-
+  const { user } = useUserAuth();
+  console.log(user)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await logIn(email, password);
-      navigate("/home");
+      let {_tokenResponse}=await logIn(email, password);
+      if(_tokenResponse.email=="adminmec@gmail.com"){
+        navigate("/admin")
+      }else{
+        navigate("/home");
+      }
+      
     } catch (err) {
       setError(err.message);
     }
