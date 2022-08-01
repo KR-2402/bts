@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import DataService from "../services/list.services";
+import { useUserAuth } from "../context/UserAuthContext";
 const List = ({ getListId }) => {
   const [lists, setList] = useState([]);
   useEffect(() => {
     getList();
   }, []);
 
+  const {user} = useUserAuth()
+  console.log(user)
   const getList = async () => {
     const data = await DataService.getAllList();
     console.log(data.docs);
@@ -29,23 +32,25 @@ const List = ({ getListId }) => {
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
-            <th>#</th>
+           
             <th>Bus No</th>
             <th>Bus Route</th>
             <th>Schedule</th>
-            <th>Action</th>
+           {user.email=="adminmec@gmail.com " ? (<th>Action</th>):('')} 
           </tr>
         </thead>
         <tbody>
           {lists.map((doc, index) => {
             return (
               <tr key={doc.id}>
-                <td>{index + 1}</td>
+                
                 <td>{doc.busno}</td>
                 <td>{doc.busroute}</td>
                 <td>{doc.schedule}</td>
                 <td>
-                  <Button
+                  {user.email=="adminmec@gmail.com" ?
+                    (<div>
+                    <Button
                     variant="secondary"
                     className="edit"
                     onClick={(e) => getListId(doc.id)}
@@ -59,6 +64,9 @@ const List = ({ getListId }) => {
                   >
                     Delete
                   </Button>
+                  </div>):('')
+                  }
+                 
                 </td>
               </tr>
             );

@@ -31,7 +31,7 @@ function App() {
                   <ProtectedRoute>
                     <Home />
                     <Notification />
-                    <Admin/>
+                    
                   </ProtectedRoute>
                  
                 }
