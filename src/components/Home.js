@@ -64,7 +64,7 @@ useEffect(() => {
         sticky="top" expand="sm" collapseOnSelect  >
         <Navbar.Brand>
           <img src={logo}  height="80px" />
-          BTS
+          College Bus Management System
         </Navbar.Brand>
 
         <Navbar.Toggle className="coloring" />
